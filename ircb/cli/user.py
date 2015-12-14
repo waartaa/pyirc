@@ -17,8 +17,8 @@ def user_cli():
 @click.argument('password', required=False)
 @coroutinize
 def user_create(username, email, password):
-    """Create a user"""
-    yield from UserStore.create(dict(
+	"""Create a user"""
+	yield from UserStore.create(dict(
         username=username,
         email=email,
         password=password
