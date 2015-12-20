@@ -84,7 +84,7 @@ class IrcbBot(irc3.IrcBot):
         connection=IrcbIrcConnection
     )
     cmd_regex = re.compile(
-        r'(?P<cmd>[A-Z]+)(?:\s+(?P<args>[^\:]+))?(?:\s*\:(?P<msg>.*))?')
+        r'(?P<cmd>[A-Z]+)(?:\s+(?P<args>[^\:]+))?(?:\:(?P<msg>.*))?')
 
     def __init__(self, *args, **kwargs):
         self.clients = None
@@ -165,7 +165,7 @@ class IrcbBot(irc3.IrcBot):
         elif cmd == 'TOPIC':
             self.topic(args, msg)
         elif cmd == 'AWAY':
-            self.away(msg)
+            self.away(args, msg)
         elif cmd == 'QUIT':
             self.quit(msg)
         elif cmd == 'NICK':
