@@ -2,6 +2,10 @@ SECRET_KEY = 'some key'
 
 DB_URI = 'sqlite:///ircb.db'
 
+SUBSCRIBER_ENDPOINTS = {
+    'stores': 'tcp://127.0.0.1:35000',
+}
+
 LOGGING_CONF = dict(
     version=1,
     formatters=dict(
@@ -46,3 +50,7 @@ LOGGING_CONF = dict(
         }
     ),
 )
+
+INTERNAL_HOST = '127.0.0.1'
+REDIS_HOST = '127.0.0.1'
+REDIS_PORT = 6379

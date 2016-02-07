@@ -1,7 +1,7 @@
 import asyncio
 from uuid import uuid1
 
-from ircb.lib.dispatcher import dispatcher
+from ircb.lib.dispatcher import Dispatcher
 
 
 class BaseStore(object):
@@ -13,20 +13,26 @@ class BaseStore(object):
     DELETED_SIGNAL = None
     CREATE_OR_UPDATE_SIGNAL = None
 
+    model = None
+
     @classmethod
     def get(cls, data):
         result = yield from cls._get(data)
+        if isinstance(result, dict):
+            result = cls.model(**result)
+        elif isinstance(result, tuple):
+            result = [cls.model(**item) for item in result]
         return result
 
     @classmethod
     def create(cls, data, async=False, timeout=10):
         result = yield from cls._create(data, async)
-        return result
+        return cls.model(**result)
 
     @classmethod
     def update(cls, data):
         result = yield from cls._update(data)
-        return result
+        return cls.model(**result)
 
     @classmethod
     def delete(cls, data):
@@ -36,7 +42,7 @@ class BaseStore(object):
     @classmethod
     def create_or_update(cls, data):
         result = yield from cls._create_or_update(data)
-        return result
+        return cls.model(**result)
 
     @classmethod
     def _get(cls, data):
@@ -115,3 +121,10 @@ class BaseStore(object):
     @classmethod
     def get_task_id(self, data):
         return str(uuid1())
+
+
+def init():
+    global dispatcher
+    dispatcher = Dispatcher(role='storeclient')
+
+dispatcher = None
