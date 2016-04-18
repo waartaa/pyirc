@@ -8,7 +8,7 @@ import irc3
 from ircb.storeclient import NetworkStore
 from ircb.storeclient import ChannelStore
 
-logger = logging.getLogger('irc')
+logger = logging.getLogger(__name__)
 
 
 class IrcbIrcConnection(irc3.IrcConnection):

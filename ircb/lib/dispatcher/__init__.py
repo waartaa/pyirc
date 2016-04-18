@@ -8,7 +8,7 @@ from collections import defaultdict
 
 from ircb.config import settings
 
-logger = logging.getLogger('dispatcher')
+logger = logging.getLogger(__name__)
 
 
 class Handler(aiozmq.rpc.AttrHandler):

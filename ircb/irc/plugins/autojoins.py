@@ -12,5 +12,5 @@ class Autojoins(Irc3AutoJoins):
 
     @irc3.event(irc3.rfc.KICK)
     def on_kick(self, mask, channel, target, **kwargs):
-        # noop for now
+        # noop for now TODO: Address this later
         pass
