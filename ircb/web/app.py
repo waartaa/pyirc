@@ -13,7 +13,7 @@ from ircb.web.network import NetworkListView, NetworkView
 from ircb.web.network import NetworkConnectionView
 from ircb.utils.config import load_config
 
-logger = logging.getLogger('aiohttp.access')
+logger = logging.getLogger(__name__)
 
 
 @asyncio.coroutine

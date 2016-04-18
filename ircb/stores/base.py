@@ -4,7 +4,7 @@ import logging
 from ircb.lib.dispatcher import Dispatcher
 from ircb.models.lib import Base
 
-logger = logging.getLogger('stores')
+logger = logging.getLogger(__name__)
 
 
 class BaseStore(object):

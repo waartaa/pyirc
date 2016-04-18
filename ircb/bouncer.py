@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import asyncio
 import logging
 
@@ -12,7 +11,7 @@ from ircb.irc import IrcbBot
 from ircb.storeclient import initialize as storeclient_initialize
 from ircb.storeclient import ChannelStore, ClientStore, NetworkStore, UserStore
 
-logger = logging.getLogger('bouncer')
+logger = logging.getLogger(__name__)
 
 
 class BouncerServerClientProtocol(Connection):
