@@ -23,6 +23,7 @@ Vagrant.configure("2") do |config|
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 9000, host: 9000
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -47,13 +48,15 @@ Vagrant.configure("2") do |config|
   # the above mentioned line
   # config.vm.synced_folder ".", "/home/vagrant/devel", type: "sshfs", sshfs_opts_append: "-o nonempty", reverse: true
   #
-  # This config installs various system dependency for irc as required to run
-  # it
-  config.vm.provision "shell", inline: "sudo dnf -y install python3 python3-devel openssl openssl-devel redis"
-  config.vm.provision "shell", inline: "sudo pip3 install -r devel/requirements.txt"
-  config.vm.provision "shell", inline: "python3 setup.py develop"
+  # Comment this line if you would like to disable the automatic update during provisioning
+  config.vm.provision "shell", inline: "sudo dnf upgrade -y"
+  # bootstrap and run with ansible
+  config.vm.provision "shell", inline: "sudo dnf -y install python2-dnf libselinux-python"
+  config.vm.provision "ansible" do |ansible|
+     ansible.playbook = "ansible/vagrant-playbook.yml"
+  end
+  config.vm.provision "shell", inline: "cd /home/vagrant/devel && sudo python3 setup.py develop"
   config.vm.provision "shell", inline: "sudo systemctl start redis.service"
-
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:

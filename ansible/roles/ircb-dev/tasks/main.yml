@@ -1,0 +1,35 @@
+---
+- name: Install helpfull packages
+  dnf: name={{ item }} state=present
+  with_items:
+      - git
+      - python-rpdb
+      - tmux
+      - tree
+      - vim-enhanced
+
+- name: Install ircb development packages
+  dnf: name={{ item }} state=present
+  with_items:
+      - gcc
+      - libffi-devel
+      - python-alembic
+      - redis
+      - python3-devel
+      - openssl-devel
+      - python-pip
+      - python-virtualenvwrapper
+      - python-devel
+      - libffi
+      - python
+      - zeromq
+      - zeromq-devel
+      - redhat-rpm-config
+
+- name: Install python packages for ircb
+  pip: requirements=/home/vagrant/devel/requirements.txt executable=pip3.5
+
+- name: Run python3 setup
+  shell: python3 setup.py develop
+  args:
+   chdir: /home/vagrant/devel
