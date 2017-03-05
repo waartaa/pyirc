@@ -56,8 +56,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision "ansible" do |ansible|
      ansible.playbook = "ansible/vagrant-playbook.yml"
   end
-  config.vm.provision "shell", inline: "cd /home/vagrant/devel && sudo python3 setup.py develop"
-  config.vm.provision "shell", inline: "sudo systemctl start redis.service"
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:

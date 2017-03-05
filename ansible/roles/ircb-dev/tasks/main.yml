@@ -33,3 +33,6 @@
   shell: python3 setup.py develop
   args:
    chdir: /home/vagrant/devel
+
+- name: Start redis service
+  service: name=redis state=started enabled=yes
