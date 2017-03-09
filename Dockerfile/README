@@ -1,0 +1,15 @@
+How to configure
+================
+
+- Build the docker image
+
+- Run the command
+    docker run --rm --name "ircb" -it -p 9000:9000 \
+    -p 10000:10000 -p 6739:6739 -v /path/to/ircb:/ircb ircb:0.0.1 \
+    bash
+
+- cd ircb
+
+- pyhton3 setup.py develop
+
+Note: Replace path to irc with the absolute path to ircb repo
